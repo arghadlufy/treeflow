@@ -1,7 +1,13 @@
-// import { Button } from "@/components/ui/button";
-import prisma from "@/lib/prisma";
+import { caller } from "@/trpc/server";
+import Client from "./client";
 
 export default async function Home() {
-  const users = await prisma.user.findMany();
-  return <div>{JSON.stringify(users)}</div>;
+  const users = await caller.getUsers();
+
+  return (
+    <div>
+      {JSON.stringify(users)}
+      <Client />
+    </div>
+  );
 }
