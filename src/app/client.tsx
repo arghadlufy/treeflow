@@ -1,11 +1,11 @@
 "use client";
 
 import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export default function Client() {
   const trpc = useTRPC();
-  const { data: users } = useQuery(trpc.getUsers.queryOptions());
-  console.log(users);
+  const { data: users } = useSuspenseQuery(trpc.getUsers.queryOptions());
+
   return <div>{JSON.stringify(users)}</div>;
 }
